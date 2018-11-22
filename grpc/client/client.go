@@ -43,4 +43,27 @@ func main() {
 	fmt.Printf("\n %v \n %v", w1.Code(),w2)
 
 	fmt.Printf("%+v\n", r2.String())
+
+	r3, e3 :=  cl2.DeactivateSubscription(context.Background(), &amsPb.DeactivateSubscriptionRequest{FullName:"projects/p1/subscription/sub1"})
+
+	if e3 != nil {
+		fmt.Print(err)
+	}
+
+	w3,w4 := status.FromError(e3)
+
+	fmt.Printf("\n %v \n %v", w3.Code(),w4)
+
+	fmt.Printf("%+v\n", r3.String())
+
+	r4, e4 :=  cl2.DeactivateSubscription(context.Background(), &amsPb.DeactivateSubscriptionRequest{FullName:"projects/p1/subscription/sub1"})
+
+	if e4 != nil {
+		fmt.Print(err)
+	}
+
+	w5,_:= status.FromError(e4)
+
+	fmt.Printf("\n %v \n %v", w5.Code(),w5.Message())
+	fmt.Printf("%+v\n", r4.String())
 }
