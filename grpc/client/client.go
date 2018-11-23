@@ -1,69 +1,106 @@
-package main
+package grpcclient
 
 import (
 	"context"
 	"fmt"
+
+	"github.com/ARGOeu/ams-push-server-cli/grpc/proto"
 	"google.golang.org/grpc"
+	"google.golang.org/grpc/codes"
 	"google.golang.org/grpc/health/grpc_health_v1"
 	"google.golang.org/grpc/status"
-	amsPb "github.com/ARGOeu/ams-push-server-cli/grpc/proto"
 )
+// grpcClient is a wrapper of the two existing clients
+type grpcClient struct {
+	hsc grpc_health_v1.HealthClient
+	psc ams.PushServiceClient
+}
 
-func main() {
+// grpcClientStatus holds the outcome of a grpc request
+type grpcClientStatus struct {
+	err     error
+	message string
+}
 
-	conn, err := grpc.Dial("localhost:5555", grpc.WithInsecure())
+// Result prints the result of an grpc request
+func (st *grpcClientStatus) Result() {
 
-	if err != nil {
-		fmt.Print(err.Error())
-	}
+	grpcStatus := status.Convert(st.err)
 
-	defer conn.Close()
-
-	cl := grpc_health_v1.NewHealthClient(conn)
-
-	r, err := cl.Check(context.Background(), &grpc_health_v1.HealthCheckRequest{Service: "api.v1.grpc.PushService"})
-	if err != nil {
-		fmt.Print(err.Error())
+	if grpcStatus.Code() == codes.OK {
+		fmt.Print("Success: " + st.message)
 		return
 	}
-	fmt.Printf("%+v\n", r.GetStatus())
 
-	retry1 := amsPb.RetryPolicy{Type: "linear", Period: 30}
-	pCfg1 := amsPb.PushConfig{PushEndpoint: "https://127.0.0.1:5000/receive_here", RetryPolicy: &retry1}
-	sub1 := amsPb.Subscription{FullName: "projects/p1/subscription/sub1", FullTopic: "projects/p1/topics/topic1", PushConfig: &pCfg1}
+	fmt.Print("Error: " + grpcStatus.Message())
+}
 
-	cl2 := amsPb.NewPushServiceClient(conn)
-	r2, e2 := cl2.ActivateSubscription(context.Background(), &amsPb.ActivateSubscriptionRequest{Subscription: &sub1})
-	if e2 != nil {
-		fmt.Print(err)
+// New instantiates a grpcClient
+func New(uri string) *grpcClient {
+
+	cl := new(grpcClient)
+
+	conn, err := grpc.Dial(uri, grpc.WithInsecure())
+
+	if err != nil {
+		fmt.Printf("Error while connecting to %v, %v", uri, err.Error())
+		return cl
 	}
 
-	w1,w2 := status.FromError(e2)
+	cl.hsc = grpc_health_v1.NewHealthClient(conn)
+	cl.psc = ams.NewPushServiceClient(conn)
 
-	fmt.Printf("\n %v \n %v", w1.Code(),w2)
+	return cl
+}
 
-	fmt.Printf("%+v\n", r2.String())
+// HealthCheck is a wrapper over the grpc health Check call
+func (cl *grpcClient) HealthCheck() *grpcClientStatus {
 
-	r3, e3 :=  cl2.DeactivateSubscription(context.Background(), &amsPb.DeactivateSubscriptionRequest{FullName:"projects/p1/subscription/sub1"})
+	r, err := cl.hsc.Check(context.Background(), &grpc_health_v1.HealthCheckRequest{
+		Service: "api.v1.grpc.PushService"},
+	)
 
-	if e3 != nil {
-		fmt.Print(err)
+	return &grpcClientStatus{
+		err:     err,
+		message: r.String(),
+	}
+}
+
+// ActivateSubscription is a wrapper over the grpc ActivateSubscription call
+func (cl *grpcClient) ActivateSubscription(fullName, fullTopic, pushEndpoint, retryType string, retryPeriod uint32) *grpcClientStatus {
+
+	actSubR := &ams.ActivateSubscriptionRequest{
+		Subscription: &ams.Subscription{
+			FullName:  fullName,
+			FullTopic: fullTopic,
+			PushConfig: &ams.PushConfig{
+				PushEndpoint: pushEndpoint,
+				RetryPolicy: &ams.RetryPolicy{
+					Type:   retryType,
+					Period: retryPeriod,
+				},
+			},
+		}}
+
+	r, err := cl.psc.ActivateSubscription(context.Background(), actSubR)
+
+	return &grpcClientStatus{
+		err:     err,
+		message: r.String(),
+	}
+}
+
+// DeactivateSubscription is a wrapper over the grpc DeactivateSubscription call
+func (cl *grpcClient) DeactivateSubscription(fullName string) *grpcClientStatus {
+
+	deActSubR := &ams.DeactivateSubscriptionRequest{
+		FullName: fullName,
 	}
 
-	w3,w4 := status.FromError(e3)
+	r, err := cl.psc.DeactivateSubscription(context.Background(), deActSubR)
 
-	fmt.Printf("\n %v \n %v", w3.Code(),w4)
-
-	fmt.Printf("%+v\n", r3.String())
-
-	r4, e4 :=  cl2.DeactivateSubscription(context.Background(), &amsPb.DeactivateSubscriptionRequest{FullName:"projects/p1/subscription/sub1"})
-
-	if e4 != nil {
-		fmt.Print(err)
+	return &grpcClientStatus{
+		err:     err,
+		message: r.String(),
 	}
-
-	w5,_:= status.FromError(e4)
-
-	fmt.Printf("\n %v \n %v", w5.Code(),w5.Message())
-	fmt.Printf("%+v\n", r4.String())
 }
