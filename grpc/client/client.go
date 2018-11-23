@@ -10,6 +10,7 @@ import (
 	"google.golang.org/grpc/health/grpc_health_v1"
 	"google.golang.org/grpc/status"
 )
+
 // grpcClient is a wrapper of the two existing clients
 type grpcClient struct {
 	hsc grpc_health_v1.HealthClient
