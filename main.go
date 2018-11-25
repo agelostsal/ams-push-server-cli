@@ -4,6 +4,6 @@ import "github.com/ARGOeu/ams-push-server-cli/cmd"
 
 func main() {
 
-	cmd.RootCmd.Execute()
+	cmd.NewRootCommand().Execute()
 
 }

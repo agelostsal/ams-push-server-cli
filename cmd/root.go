@@ -1,18 +1,14 @@
 package cmd
 
-import (
-	"github.com/ARGOeu/ams-push-server-cli/cmd/health"
-	"github.com/spf13/cobra"
-)
+import "github.com/spf13/cobra"
 
-var RootCmd = &cobra.Command{}
+// NewRootCommand initialises and returns the root command of the cli
+func NewRootCommand() *cobra.Command {
 
-var uri string
-
-func init() {
+	var RootCmd = &cobra.Command{}
+	var uri string
 
 	RootCmd.PersistentFlags().StringVarP(&uri, "uri", "u", "", "-u host:port")
 	RootCmd.MarkPersistentFlagRequired("uri")
-
-	RootCmd.AddCommand(health.NewHealthCheckCommand())
+	return RootCmd
 }
