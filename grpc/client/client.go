@@ -24,16 +24,15 @@ type grpcClientStatus struct {
 }
 
 // Result prints the result of an grpc request
-func (st *grpcClientStatus) Result() {
+func (st *grpcClientStatus) Result() string {
 
 	grpcStatus := status.Convert(st.err)
 
 	if grpcStatus.Code() == codes.OK {
-		fmt.Print("Success: " + st.message)
-		return
+		return fmt.Sprintf("Success: %v", st.message)
 	}
 
-	fmt.Print("Error: " + grpcStatus.Message())
+	return fmt.Sprintf("Error: %v", grpcStatus.Message())
 }
 
 // New instantiates a grpcClient
