@@ -1,12 +1,11 @@
 package activate
 
 import (
-	"fmt"
 	"github.com/ARGOeu/ams-push-server-cli/grpc/client"
 	"github.com/spf13/cobra"
 )
 
-type SubActivateOptions struct {
+type subActivateOptions struct {
 	FullName     string
 	FullTopic    string
 	PushEndpoint string
@@ -14,33 +13,38 @@ type SubActivateOptions struct {
 	RetryPeriod  uint32
 }
 
-var subOpts SubActivateOptions
-
+// NewSubscriptionActivateCommand initialises a subscription activation command
 func NewSubscriptionActivateCommand() *cobra.Command {
 
+	var subOpts subActivateOptions
+
 	activateSubCmd := &cobra.Command{
-		Use:                   "activate ([-f FILENAME] | TYPE [(NAME | -l label | --all)])",
-		Short:                 "llll",
-		Long:                  "ffff",
-		Example:               "fgsgvaav",
+		Use:   "activate",
+		Short: "Activates a subscription on a push server",
+		Long:  "The activate command informs a push server to start the push functionality for the given subscription",
 		DisableFlagsInUseLine: true,
 		Run: func(cmd *cobra.Command, args []string) {
-			t1, err := cmd.Flags().GetString("urid")
-			fmt.Printf("%+v", err)
-			grpcclient.New(t1).ActivateSubscription(subOpts.FullName, "", "", "", 90).Result()
+			// get the global uri flag
+			uri, _ := cmd.Flags().GetString("uri")
+			// perform the subscription activation
+			cmd.Println(grpcclient.New(uri).ActivateSubscription(subOpts.FullName, subOpts.FullTopic, subOpts.PushEndpoint, subOpts.RetryType, subOpts.RetryPeriod).Result())
 		},
 	}
 
-	activateSubCmd.PersistentFlags().StringVarP(&subOpts.FullName, "fullname", "n", "", "-n /projects/project/subscriptions/subanme")
-	activateSubCmd.MarkPersistentFlagRequired("fullname")
-	activateSubCmd.PersistentFlags().StringVarP(&subOpts.FullTopic, "fulltopic", "t", "", "-t /projects/project/topics/topic")
-	activateSubCmd.MarkPersistentFlagRequired("fulltopic")
-	activateSubCmd.PersistentFlags().StringVarP(&subOpts.PushEndpoint, "pushendpoint", "e", "", "-e https://127.0.0.1:5000/receive_here")
-	activateSubCmd.MarkPersistentFlagRequired("pushendpoint")
-	activateSubCmd.PersistentFlags().StringVarP(&subOpts.RetryType, "retrytype", "r", "", "-r linear")
-	activateSubCmd.MarkPersistentFlagRequired("retrytype")
-	activateSubCmd.PersistentFlags().Uint32VarP(&subOpts.RetryPeriod, "retryperiod", "p", 0, "-p 300")
-	activateSubCmd.MarkPersistentFlagRequired("retryperiod")
+	activateSubCmd.PersistentFlags().StringVarP(&subOpts.FullName, "full-sub", "s", "", "-s /projects/project/subscriptions/subanme")
+	activateSubCmd.MarkPersistentFlagRequired("full-sub")
+
+	activateSubCmd.PersistentFlags().StringVarP(&subOpts.FullTopic, "full-topic", "f", "", "-f /projects/project/topics/topicname")
+	activateSubCmd.MarkPersistentFlagRequired("full-topic")
+
+	activateSubCmd.PersistentFlags().StringVarP(&subOpts.PushEndpoint, "push-endpoint", "e", "", "-e https://127.0.0.1:5000/receive_here")
+	activateSubCmd.MarkPersistentFlagRequired("push-endpoint")
+
+	activateSubCmd.PersistentFlags().StringVarP(&subOpts.RetryType, "retry-type", "t", "", "-t linear")
+	activateSubCmd.MarkPersistentFlagRequired("retry-type")
+
+	activateSubCmd.PersistentFlags().Uint32VarP(&subOpts.RetryPeriod, "retry-period", "p", 0, "-p 300")
+	activateSubCmd.MarkPersistentFlagRequired("retry-period")
 
 	return activateSubCmd
 

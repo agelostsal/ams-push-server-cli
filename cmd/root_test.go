@@ -38,6 +38,7 @@ func (suite *RootCmdTestSuite) TestRootCmdOutput() {
 		"Usage:\n" +
 			"   [command]\n\n" +
 			"Available Commands:\n" +
+			"  activate    Activates a subscription on a push server\n" +
 			"  health      Performs a health check call\n" +
 			"  help        Help about any command\n\n" +
 			"Flags:\n" +

@@ -1,6 +1,7 @@
 package cmd
 
 import (
+	"github.com/ARGOeu/ams-push-server-cli/cmd/activate"
 	"github.com/ARGOeu/ams-push-server-cli/cmd/health"
 	"github.com/spf13/cobra"
 )
@@ -17,6 +18,9 @@ func NewRootCommand() *cobra.Command {
 
 	// add health check sub command
 	RootCmd.AddCommand(health.NewHealthCheckCommand())
+
+	// add activate subscription sub command
+	RootCmd.AddCommand(activate.NewSubscriptionActivateCommand())
 
 	return RootCmd
 }
