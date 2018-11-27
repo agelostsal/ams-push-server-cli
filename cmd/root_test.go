@@ -39,6 +39,7 @@ func (suite *RootCmdTestSuite) TestRootCmdOutput() {
 			"   [command]\n\n" +
 			"Available Commands:\n" +
 			"  activate    Activates a subscription on a push server\n" +
+			"  deactivate  Deactivates a subscription on a push server\n" +
 			"  health      Performs a health check call\n" +
 			"  help        Help about any command\n\n" +
 			"Flags:\n" +
@@ -53,12 +54,17 @@ func (suite *RootCmdTestSuite) TestRootCmdOutput() {
 func (suite *RootCmdTestSuite) TestRootCmdFlagValues() {
 
 	rtCmd := NewRootCommand()
+	// despite not using the output here, we save the output to a buffer so we don't pollute the std.out with the help option
+	b := new(bytes.Buffer)
+	rtCmd.SetOutput(b)
+
 	rtCmd.SetArgs([]string{"--uri=localhost:5555"})
 	rtCmd.Execute()
 
 	u, err := rtCmd.Flags().GetString("uri")
 
 	rtCmd2 := NewRootCommand()
+	rtCmd2.SetOutput(b)
 	rtCmd2.SetArgs([]string{"-u=localhost:5555"})
 	rtCmd2.Execute()
 

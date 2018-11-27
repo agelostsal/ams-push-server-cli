@@ -1,25 +1,30 @@
 package deactivate
 
 import (
-	"fmt"
 	"github.com/ARGOeu/ams-push-server-cli/grpc/client"
 	"github.com/spf13/cobra"
 )
 
-var subName string
-
+// NewSubscriptionDeactivateCommand initialises a subscription deactivation command
 func NewSubscriptionDeactivateCommand() *cobra.Command {
 
+	var subName string
+
 	deactivateSubCmd := &cobra.Command{
-		Use: "deactivate",
+		Use:   "deactivate",
+		Short: "Deactivates a subscription on a push server",
+		Long:  "The deactivate command informs a push server to stop the push functionality for the given subscription",
 		DisableFlagsInUseLine: true,
 		Run: func(cmd *cobra.Command, args []string) {
-			t1, err := cmd.Flags().GetString("urid")
-			fmt.Printf("%+v", err)
-			grpcclient.New(t1).DeactivateSubscription(subName).Result()
+			// get the global uri flag
+			uri, _ := cmd.Flags().GetString("uri")
+			// perform the subscription deactivation
+			cmd.Println(grpcclient.New(uri).DeactivateSubscription(subName).Result())
 		},
 	}
 
-	return deactivateSubCmd
+	deactivateSubCmd.PersistentFlags().StringVarP(&subName, "full-sub", "s", "", "-s /projects/project/subscriptions/subanme")
+	deactivateSubCmd.MarkPersistentFlagRequired("full-sub")
 
+	return deactivateSubCmd
 }
