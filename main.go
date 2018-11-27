@@ -1,6 +1,8 @@
 package main
 
-import "github.com/ARGOeu/ams-push-server-cli/cmd"
+import (
+	"github.com/ARGOeu/ams-push-server-cli/cmd"
+)
 
 func main() {
 

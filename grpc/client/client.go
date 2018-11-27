@@ -62,7 +62,7 @@ func (cl *grpcClient) HealthCheck() *grpcClientStatus {
 
 	return &grpcClientStatus{
 		err:     err,
-		message: r.String(),
+		message: r.GetStatus().String(),
 	}
 }
 
@@ -86,7 +86,7 @@ func (cl *grpcClient) ActivateSubscription(fullName, fullTopic, pushEndpoint, re
 
 	return &grpcClientStatus{
 		err:     err,
-		message: r.String(),
+		message: r.GetMessage(),
 	}
 }
 
@@ -101,6 +101,6 @@ func (cl *grpcClient) DeactivateSubscription(fullName string) *grpcClientStatus 
 
 	return &grpcClientStatus{
 		err:     err,
-		message: r.String(),
+		message: r.GetMessage(),
 	}
 }

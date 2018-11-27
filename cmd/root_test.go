@@ -30,11 +30,22 @@ func (suite *RootCmdTestSuite) TestRootCmdOutput() {
 	rtCmd := NewRootCommand()
 	b := new(bytes.Buffer)
 
-	rtCmd.SetArgs([]string{"help"})
+	rtCmd.SetArgs([]string{"-h"})
 	rtCmd.SetOutput(b)
 	rtCmd.Execute()
 
-	suite.Equal("", b.String())
+	expectedOutput :=
+		"Usage:\n" +
+			"   [command]\n\n" +
+			"Available Commands:\n" +
+			"  health      Performs a health check call\n" +
+			"  help        Help about any command\n\n" +
+			"Flags:\n" +
+			"  -h, --help         help for this command\n" +
+			"  -u, --uri string   -u host:port\n\n" +
+			"Use \" [command] --help\" for more information about a command.\n"
+
+	suite.Equal(expectedOutput, b.String())
 }
 
 // TestRootCmdFlagValues tests that the global flags set at the root command are parsed and accessed correctly

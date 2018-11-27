@@ -9,8 +9,9 @@ import (
 func NewHealthCheckCommand() *cobra.Command {
 
 	healthCheckCmd := &cobra.Command{
-		Use:  "health",
-		Long: "The health command is used to perform a health check on the grpc server",
+		Use:   "health",
+		Short: "Performs a health check call",
+		Long:  "The health command is used to perform a health check to the grpc server",
 		DisableFlagsInUseLine: true,
 		Run: func(cmd *cobra.Command, args []string) {
 			// get the global uri flag
