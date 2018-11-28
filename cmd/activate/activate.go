@@ -31,10 +31,10 @@ func NewSubscriptionActivateCommand() *cobra.Command {
 		},
 	}
 
-	activateSubCmd.PersistentFlags().StringVarP(&subOpts.FullName, "full-sub", "s", "", "-s /projects/project/subscriptions/subanme")
+	activateSubCmd.PersistentFlags().StringVarP(&subOpts.FullName, "full-sub", "s", "", "-s /projects/projectname/subscriptions/subanme")
 	activateSubCmd.MarkPersistentFlagRequired("full-sub")
 
-	activateSubCmd.PersistentFlags().StringVarP(&subOpts.FullTopic, "full-topic", "f", "", "-f /projects/project/topics/topicname")
+	activateSubCmd.PersistentFlags().StringVarP(&subOpts.FullTopic, "full-topic", "f", "", "-f /projects/projectname/topics/topicname")
 	activateSubCmd.MarkPersistentFlagRequired("full-topic")
 
 	activateSubCmd.PersistentFlags().StringVarP(&subOpts.PushEndpoint, "push-endpoint", "e", "", "-e https://127.0.0.1:5000/receive_here")

@@ -29,13 +29,13 @@ func (suite *ActivateSubscriptionCmdTestSuite) TestNewSubscriptionActivateComman
 	sn := as.Flags().Lookup("full-sub")
 	suite.Equal("full-sub", sn.Name)
 	suite.Equal("s", sn.Shorthand)
-	suite.Equal("-s /projects/project/subscriptions/subanme", sn.Usage)
+	suite.Equal("-s /projects/projectname/subscriptions/subanme", sn.Usage)
 	suite.Equal("string", sn.Value.Type())
 
 	fn := as.Flags().Lookup("full-topic")
 	suite.Equal("full-topic", fn.Name)
 	suite.Equal("f", fn.Shorthand)
-	suite.Equal("-f /projects/project/topics/topicname", fn.Usage)
+	suite.Equal("-f /projects/projectname/topics/topicname", fn.Usage)
 	suite.Equal("string", fn.Value.Type())
 
 	pe := as.Flags().Lookup("push-endpoint")
@@ -70,8 +70,8 @@ func (suite *ActivateSubscriptionCmdTestSuite) TestSubscriptionActivateCmdOutput
 		"Usage:\n" +
 		"  activate\n\n" +
 		"Flags:\n" +
-		"  -s, --full-sub string        -s /projects/project/subscriptions/subanme\n" +
-		"  -f, --full-topic string      -f /projects/project/topics/topicname\n" +
+		"  -s, --full-sub string        -s /projects/projectname/subscriptions/subanme\n" +
+		"  -f, --full-topic string      -f /projects/projectname/topics/topicname\n" +
 		"  -h, --help                   help for activate\n" +
 		"  -e, --push-endpoint string   -e https://127.0.0.1:5000/receive_here\n" +
 		"  -p, --retry-period uint32    -p 300\n" +
@@ -124,8 +124,8 @@ func (suite *ActivateSubscriptionCmdTestSuite) TestSubscriptionActivateCmdOutput
 		"Usage:\n" +
 		"  activate\n\n" +
 		"Flags:\n" +
-		"  -s, --full-sub string        -s /projects/project/subscriptions/subanme\n" +
-		"  -f, --full-topic string      -f /projects/project/topics/topicname\n" +
+		"  -s, --full-sub string        -s /projects/projectname/subscriptions/subanme\n" +
+		"  -f, --full-topic string      -f /projects/projectname/topics/topicname\n" +
 		"  -h, --help                   help for activate\n" +
 		"  -e, --push-endpoint string   -e https://127.0.0.1:5000/receive_here\n" +
 		"  -p, --retry-period uint32    -p 300\n" +

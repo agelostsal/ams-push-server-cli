@@ -23,7 +23,7 @@ func NewSubscriptionDeactivateCommand() *cobra.Command {
 		},
 	}
 
-	deactivateSubCmd.PersistentFlags().StringVarP(&subName, "full-sub", "s", "", "-s /projects/project/subscriptions/subanme")
+	deactivateSubCmd.PersistentFlags().StringVarP(&subName, "full-sub", "s", "", "-s /projects/projectname/subscriptions/subanme")
 	deactivateSubCmd.MarkPersistentFlagRequired("full-sub")
 
 	return deactivateSubCmd

@@ -29,7 +29,7 @@ func (suite *DeactivateSubscriptionCmdTestSuite) TestNewSubscriptionDeactivateCo
 	sn := ds.Flags().Lookup("full-sub")
 	suite.Equal("full-sub", sn.Name)
 	suite.Equal("s", sn.Shorthand)
-	suite.Equal("-s /projects/project/subscriptions/subanme", sn.Usage)
+	suite.Equal("-s /projects/projectname/subscriptions/subanme", sn.Usage)
 	suite.Equal("string", sn.Value.Type())
 }
 
@@ -46,7 +46,7 @@ func (suite *DeactivateSubscriptionCmdTestSuite) TestSubscriptionDeactivateCmdOu
 		"Usage:\n" +
 		"  deactivate\n\n" +
 		"Flags:\n" +
-		"  -s, --full-sub string   -s /projects/project/subscriptions/subanme\n" +
+		"  -s, --full-sub string   -s /projects/projectname/subscriptions/subanme\n" +
 		"  -h, --help              help for deactivate\n"
 
 	// test the help output
@@ -92,7 +92,7 @@ func (suite *DeactivateSubscriptionCmdTestSuite) TestSubscriptionDeactivateCmdOu
 		"Usage:\n" +
 		"  deactivate\n\n" +
 		"Flags:\n" +
-		"  -s, --full-sub string   -s /projects/project/subscriptions/subanme\n" +
+		"  -s, --full-sub string   -s /projects/projectname/subscriptions/subanme\n" +
 		"  -h, --help              help for deactivate\n\n"
 
 	// test missing flags
