@@ -42,8 +42,8 @@ Flags:
   -f, --full-topic string      -f /projects/projectname/topics/topicname
   -h, --help                   help for activate
   -e, --push-endpoint string   -e https://127.0.0.1:5000/receive_here
-  -p, --retry-period uint32    -p 300
-  -t, --retry-type string      -t linear
+  -p, --retry-period uint32    -p 300 (default 300)
+  -t, --retry-type string      -t linear (default "linear")
 
 Global Flags:
   -u, --uri string   -u host:port

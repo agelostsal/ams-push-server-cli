@@ -48,12 +48,14 @@ func (suite *ActivateSubscriptionCmdTestSuite) TestNewSubscriptionActivateComman
 	suite.Equal("retry-period", rp.Name)
 	suite.Equal("p", rp.Shorthand)
 	suite.Equal("-p 300", rp.Usage)
+	suite.Equal("300", rp.DefValue)
 	suite.Equal("uint32", rp.Value.Type())
 
 	rt := as.Flags().Lookup("retry-type")
 	suite.Equal("retry-type", rt.Name)
 	suite.Equal("t", rt.Shorthand)
 	suite.Equal("-t linear", rt.Usage)
+	suite.Equal("linear", rt.DefValue)
 	suite.Equal("string", rt.Value.Type())
 }
 
@@ -74,8 +76,8 @@ func (suite *ActivateSubscriptionCmdTestSuite) TestSubscriptionActivateCmdOutput
 		"  -f, --full-topic string      -f /projects/projectname/topics/topicname\n" +
 		"  -h, --help                   help for activate\n" +
 		"  -e, --push-endpoint string   -e https://127.0.0.1:5000/receive_here\n" +
-		"  -p, --retry-period uint32    -p 300\n" +
-		"  -t, --retry-type string      -t linear\n"
+		"  -p, --retry-period uint32    -p 300 (default 300)\n" +
+		"  -t, --retry-type string      -t linear (default \"linear\")\n"
 
 	// test the help output
 	suite.Equal(expectedOut, b.String())
@@ -128,8 +130,8 @@ func (suite *ActivateSubscriptionCmdTestSuite) TestSubscriptionActivateCmdOutput
 		"  -f, --full-topic string      -f /projects/projectname/topics/topicname\n" +
 		"  -h, --help                   help for activate\n" +
 		"  -e, --push-endpoint string   -e https://127.0.0.1:5000/receive_here\n" +
-		"  -p, --retry-period uint32    -p 300\n" +
-		"  -t, --retry-type string      -t linear\n\n"
+		"  -p, --retry-period uint32    -p 300 (default 300)\n" +
+		"  -t, --retry-type string      -t linear (default \"linear\")\n\n"
 
 	// test missing flags
 	suite.Equal(expectedOutput2, b2.String())

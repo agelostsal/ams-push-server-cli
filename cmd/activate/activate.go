@@ -40,10 +40,10 @@ func NewSubscriptionActivateCommand() *cobra.Command {
 	activateSubCmd.PersistentFlags().StringVarP(&subOpts.PushEndpoint, "push-endpoint", "e", "", "-e https://127.0.0.1:5000/receive_here")
 	activateSubCmd.MarkPersistentFlagRequired("push-endpoint")
 
-	activateSubCmd.PersistentFlags().StringVarP(&subOpts.RetryType, "retry-type", "t", "", "-t linear")
+	activateSubCmd.PersistentFlags().StringVarP(&subOpts.RetryType, "retry-type", "t", "linear", "-t linear")
 	activateSubCmd.MarkPersistentFlagRequired("retry-type")
 
-	activateSubCmd.PersistentFlags().Uint32VarP(&subOpts.RetryPeriod, "retry-period", "p", 0, "-p 300")
+	activateSubCmd.PersistentFlags().Uint32VarP(&subOpts.RetryPeriod, "retry-period", "p", 300, "-p 300")
 	activateSubCmd.MarkPersistentFlagRequired("retry-period")
 
 	return activateSubCmd
