@@ -3,6 +3,8 @@ package activate
 import (
 	"github.com/ARGOeu/ams-push-server-cli/grpc/client"
 	"github.com/spf13/cobra"
+	"github.com/spf13/viper"
+	"strconv"
 )
 
 type subActivateOptions struct {
@@ -46,6 +48,15 @@ func NewSubscriptionActivateCommand() *cobra.Command {
 	activateSubCmd.PersistentFlags().Uint32VarP(&subOpts.RetryPeriod, "retry-period", "p", 300, "-p 300")
 	activateSubCmd.MarkPersistentFlagRequired("retry-period")
 
-	return activateSubCmd
+	// set the flag retrieved from viper
+	// if the cli argumernt is given, it will over it
+	if viper.GetString("retry_type") != "" {
+		activateSubCmd.PersistentFlags().Set("retry-type", viper.GetString("retry_type"))
+	}
 
+	if viper.GetString("retry_period") != "" {
+		activateSubCmd.PersistentFlags().Set("retry-period", strconv.Itoa(viper.GetInt("retry_period")))
+	}
+
+	return activateSubCmd
 }

@@ -81,3 +81,14 @@ $ apscli deactivate -u example.com:443 -s /projects/projectname/subscriptions/su
 ```commandline
 $ Success: Subscription /projects/projectname/subscriptions/subanme deactivated
 ```
+
+# Configuration
+
+You can also have some pre-defined values in a config file named `config.json` in the root of the directory.
+```json
+{
+  "uri": "localhost:5555", 
+  "retry_type": "linear",
+  "retry_period": 300
+}
+```

@@ -26,7 +26,7 @@ func (suite *DeactivateSubscriptionCmdTestSuite) TestNewSubscriptionDeactivateCo
 	suite.Equal("The deactivate command informs a push server to stop the push functionality for the given subscription", ds.Long)
 	suite.True(ds.DisableFlagsInUseLine)
 
-	sn := ds.Flags().Lookup("full-sub")
+	sn := ds.PersistentFlags().Lookup("full-sub")
 	suite.Equal("full-sub", sn.Name)
 	suite.Equal("s", sn.Shorthand)
 	suite.Equal("-s /projects/projectname/subscriptions/subanme", sn.Usage)
@@ -60,7 +60,7 @@ func (suite *DeactivateSubscriptionCmdTestSuite) TestSubscriptionDeactivateCmdOu
 
 	ds2.Run = func(cmd *cobra.Command, args []string) {
 		// get the global uri flag
-		s, _ := cmd.Flags().GetString("full-sub")
+		s, _ := cmd.PersistentFlags().GetString("full-sub")
 		// perform the subscription deactivation
 		cmd.Printf("Success: Subscription %v deactivated\n", s)
 	}
@@ -73,7 +73,7 @@ func (suite *DeactivateSubscriptionCmdTestSuite) TestSubscriptionDeactivateCmdOu
 	b2.Reset()
 	ds2.Run = func(cmd *cobra.Command, args []string) {
 		// get the global uri flag
-		s, _ := cmd.Flags().GetString("full-sub")
+		s, _ := cmd.PersistentFlags().GetString("full-sub")
 		// perform the subscription deactivation
 		cmd.Printf("Error: Subscription %v is not active\n", s)
 	}

@@ -15,7 +15,7 @@ func NewHealthCheckCommand() *cobra.Command {
 		DisableFlagsInUseLine: true,
 		Run: func(cmd *cobra.Command, args []string) {
 			// get the global uri flag
-			uri, _ := cmd.Flags().GetString("uri")
+			uri, _ := cmd.PersistentFlags().GetString("uri")
 			// perform the health check
 			cmd.Println(grpcclient.New(uri).HealthCheck().Result())
 		},

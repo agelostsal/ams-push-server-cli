@@ -2,6 +2,7 @@ package cmd
 
 import (
 	"bytes"
+	"github.com/spf13/viper"
 	"github.com/stretchr/testify/suite"
 	"testing"
 )
@@ -13,10 +14,22 @@ type RootCmdTestSuite struct {
 // TestNewRootCmd tests that the root command is initialised properly
 func (suite *RootCmdTestSuite) TestNewRootCmd() {
 
+	// initialise viper
+	config := `{
+	"uri": "host:5555"
+}`
+	viper.SetConfigType("json")
+	viper.ReadConfig(bytes.NewBuffer([]byte(config)))
+
 	rtCmd := NewRootCommand()
 	rtCmd.Execute()
 
-	uriFlag := rtCmd.Flags().Lookup("uri")
+	/// check that the flag has been pre assigned from the viper config
+	u, err := rtCmd.PersistentFlags().GetString("uri")
+	suite.Equal("host:5555", u)
+	suite.Nil(err)
+
+	uriFlag := rtCmd.PersistentFlags().Lookup("uri")
 
 	suite.Equal("uri", uriFlag.Name)
 	suite.Equal("u", uriFlag.Shorthand)
@@ -53,6 +66,15 @@ func (suite *RootCmdTestSuite) TestRootCmdOutput() {
 // TestRootCmdFlagValues tests that the global flags set at the root command are parsed and accessed correctly
 func (suite *RootCmdTestSuite) TestRootCmdFlagValues() {
 
+	// initialise viper
+	config := `{
+	"uri": "host:5555"
+}`
+	viper.SetConfigType("json")
+	viper.ReadConfig(bytes.NewBuffer([]byte(config)))
+
+	// make sure that since the uri argument has been set through the cli, it will override viper's configuration value
+
 	rtCmd := NewRootCommand()
 	// despite not using the output here, we save the output to a buffer so we don't pollute the std.out with the help option
 	b := new(bytes.Buffer)
@@ -61,14 +83,14 @@ func (suite *RootCmdTestSuite) TestRootCmdFlagValues() {
 	rtCmd.SetArgs([]string{"--uri=localhost:5555"})
 	rtCmd.Execute()
 
-	u, err := rtCmd.Flags().GetString("uri")
+	u, err := rtCmd.PersistentFlags().GetString("uri")
 
 	rtCmd2 := NewRootCommand()
 	rtCmd2.SetOutput(b)
 	rtCmd2.SetArgs([]string{"-u=localhost:5555"})
 	rtCmd2.Execute()
 
-	u2, err2 := rtCmd2.Flags().GetString("uri")
+	u2, err2 := rtCmd2.PersistentFlags().GetString("uri")
 
 	suite.Equal("localhost:5555", u)
 	suite.Nil(err)

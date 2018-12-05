@@ -5,26 +5,33 @@ import (
 	"github.com/ARGOeu/ams-push-server-cli/cmd/deactivate"
 	"github.com/ARGOeu/ams-push-server-cli/cmd/health"
 	"github.com/spf13/cobra"
+	"github.com/spf13/viper"
 )
 
 // NewRootCommand initialises and returns the root command of the cli
 func NewRootCommand() *cobra.Command {
 
-	var RootCmd = &cobra.Command{}
+	var rootCmd = &cobra.Command{}
 	var uri string
 
 	// initialises the global flags
-	RootCmd.PersistentFlags().StringVarP(&uri, "uri", "u", "", "-u host:port")
-	RootCmd.MarkPersistentFlagRequired("uri")
+	rootCmd.PersistentFlags().StringVarP(&uri, "uri", "u", "", "-u host:port")
+	rootCmd.MarkPersistentFlagRequired("uri")
+
+	// set the flag retrieved from viper
+	// if the cli argumernt is given, it will over it
+	if viper.GetString("uri") != "" {
+		rootCmd.PersistentFlags().Set("uri", viper.GetString("uri"))
+	}
 
 	// add health check sub command
-	RootCmd.AddCommand(health.NewHealthCheckCommand())
+	rootCmd.AddCommand(health.NewHealthCheckCommand())
 
 	//add deactivate subscription command
-	RootCmd.AddCommand(deactivate.NewSubscriptionDeactivateCommand())
+	rootCmd.AddCommand(deactivate.NewSubscriptionDeactivateCommand())
 
 	// add activate subscription sub command
-	RootCmd.AddCommand(activate.NewSubscriptionActivateCommand())
+	rootCmd.AddCommand(activate.NewSubscriptionActivateCommand())
 
-	return RootCmd
+	return rootCmd
 }
