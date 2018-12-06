@@ -13,6 +13,7 @@ Available Commands:
   deactivate  Deactivates a subscription on a push server
   health      Performs a health check call
   help        Help about any command
+  list-one    Retrieves information about a subscription currently active on the push server
 
 Flags:
   -h, --help         help for this command
@@ -81,6 +82,30 @@ $ apscli deactivate -u example.com:443 -s /projects/projectname/subscriptions/su
 ```commandline
 $ Success: Subscription /projects/projectname/subscriptions/subanme deactivated
 ```
+
+### Retrieve information about a currently active subscription
+
+```commandline
+The list-one command retrieves all information related to the given subscription name from the push server
+
+Usage:
+   list-one
+
+Flags:
+  -s, --full-sub string   -s /projects/projectname/subscriptions/subanme
+  -h, --help              help for list-one
+
+Global Flags:
+  -u, --uri string   -u host:port
+```
+
+```commandline
+$ apscli list-one -u example.com:443 -s /projects/projectname/subscriptions/subanme 
+```
+```commandline
+$ Success: subscription:'<'full_name:"/projects/projectname/subscriptions/subanme" full_topic:"/projects/projectname/topics/topicname" PushConfig:'<'push_endpoint:"host.com" RetryPolicy:'<'type:"linear" period:300 > > >
+```
+
 
 # Configuration
 

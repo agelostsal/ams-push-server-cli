@@ -54,7 +54,8 @@ func (suite *RootCmdTestSuite) TestRootCmdOutput() {
 			"  activate    Activates a subscription on a push server\n" +
 			"  deactivate  Deactivates a subscription on a push server\n" +
 			"  health      Performs a health check call\n" +
-			"  help        Help about any command\n\n" +
+			"  help        Help about any command\n" +
+			"  list-one    Retrieves information about a subscription currently active on the push server\n\n" +
 			"Flags:\n" +
 			"  -h, --help         help for this command\n" +
 			"  -u, --uri string   -u host:port\n\n" +

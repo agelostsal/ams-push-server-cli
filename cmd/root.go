@@ -4,6 +4,7 @@ import (
 	"github.com/ARGOeu/ams-push-server-cli/cmd/activate"
 	"github.com/ARGOeu/ams-push-server-cli/cmd/deactivate"
 	"github.com/ARGOeu/ams-push-server-cli/cmd/health"
+	"github.com/ARGOeu/ams-push-server-cli/cmd/retrieve"
 	"github.com/spf13/cobra"
 	"github.com/spf13/viper"
 )
@@ -27,8 +28,11 @@ func NewRootCommand() *cobra.Command {
 	// add health check sub command
 	rootCmd.AddCommand(health.NewHealthCheckCommand())
 
-	//add deactivate subscription command
+	// add deactivate subscription command
 	rootCmd.AddCommand(deactivate.NewSubscriptionDeactivateCommand())
+
+	// add list-one subscription command
+	rootCmd.AddCommand(retrieve.NewSubscriptionListOneCommand())
 
 	// add activate subscription sub command
 	rootCmd.AddCommand(activate.NewSubscriptionActivateCommand())

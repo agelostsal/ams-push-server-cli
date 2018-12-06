@@ -104,3 +104,18 @@ func (cl *grpcClient) DeactivateSubscription(fullName string) *grpcClientStatus 
 		message: r.GetMessage(),
 	}
 }
+
+// GetSubscription is a wrapper over the grpc GetSubscription call
+func (cl *grpcClient) GetSubscription(fullName string) *grpcClientStatus {
+
+	getSubR := &ams.GetSubscriptionRequest{
+		FullName: fullName,
+	}
+
+	r, err := cl.psc.GetSubscription(context.Background(), getSubR)
+
+	return &grpcClientStatus{
+		err:     err,
+		message: r.String(),
+	}
+}

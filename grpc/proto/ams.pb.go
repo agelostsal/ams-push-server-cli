@@ -22,6 +22,88 @@ var _ = math.Inf
 // proto package needs to be updated.
 const _ = proto.ProtoPackageIsVersion2 // please upgrade the proto package
 
+// Wrapper for subscription.
+type GetSubscriptionResponse struct {
+	// Required. A subscription.
+	Subscription         *Subscription `protobuf:"bytes,1,opt,name=subscription,proto3" json:"subscription,omitempty"`
+	XXX_NoUnkeyedLiteral struct{}      `json:"-"`
+	XXX_unrecognized     []byte        `json:"-"`
+	XXX_sizecache        int32         `json:"-"`
+}
+
+func (m *GetSubscriptionResponse) Reset()         { *m = GetSubscriptionResponse{} }
+func (m *GetSubscriptionResponse) String() string { return proto.CompactTextString(m) }
+func (*GetSubscriptionResponse) ProtoMessage()    {}
+func (*GetSubscriptionResponse) Descriptor() ([]byte, []int) {
+	return fileDescriptor_85e4db6795b5b1aa, []int{0}
+}
+
+func (m *GetSubscriptionResponse) XXX_Unmarshal(b []byte) error {
+	return xxx_messageInfo_GetSubscriptionResponse.Unmarshal(m, b)
+}
+func (m *GetSubscriptionResponse) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
+	return xxx_messageInfo_GetSubscriptionResponse.Marshal(b, m, deterministic)
+}
+func (m *GetSubscriptionResponse) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_GetSubscriptionResponse.Merge(m, src)
+}
+func (m *GetSubscriptionResponse) XXX_Size() int {
+	return xxx_messageInfo_GetSubscriptionResponse.Size(m)
+}
+func (m *GetSubscriptionResponse) XXX_DiscardUnknown() {
+	xxx_messageInfo_GetSubscriptionResponse.DiscardUnknown(m)
+}
+
+var xxx_messageInfo_GetSubscriptionResponse proto.InternalMessageInfo
+
+func (m *GetSubscriptionResponse) GetSubscription() *Subscription {
+	if m != nil {
+		return m.Subscription
+	}
+	return nil
+}
+
+// Contains the name of the subscription we want to retrieve
+type GetSubscriptionRequest struct {
+	// Required. The full resource name of the subscrption.
+	FullName             string   `protobuf:"bytes,1,opt,name=full_name,json=fullName,proto3" json:"full_name,omitempty"`
+	XXX_NoUnkeyedLiteral struct{} `json:"-"`
+	XXX_unrecognized     []byte   `json:"-"`
+	XXX_sizecache        int32    `json:"-"`
+}
+
+func (m *GetSubscriptionRequest) Reset()         { *m = GetSubscriptionRequest{} }
+func (m *GetSubscriptionRequest) String() string { return proto.CompactTextString(m) }
+func (*GetSubscriptionRequest) ProtoMessage()    {}
+func (*GetSubscriptionRequest) Descriptor() ([]byte, []int) {
+	return fileDescriptor_85e4db6795b5b1aa, []int{1}
+}
+
+func (m *GetSubscriptionRequest) XXX_Unmarshal(b []byte) error {
+	return xxx_messageInfo_GetSubscriptionRequest.Unmarshal(m, b)
+}
+func (m *GetSubscriptionRequest) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
+	return xxx_messageInfo_GetSubscriptionRequest.Marshal(b, m, deterministic)
+}
+func (m *GetSubscriptionRequest) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_GetSubscriptionRequest.Merge(m, src)
+}
+func (m *GetSubscriptionRequest) XXX_Size() int {
+	return xxx_messageInfo_GetSubscriptionRequest.Size(m)
+}
+func (m *GetSubscriptionRequest) XXX_DiscardUnknown() {
+	xxx_messageInfo_GetSubscriptionRequest.DiscardUnknown(m)
+}
+
+var xxx_messageInfo_GetSubscriptionRequest proto.InternalMessageInfo
+
+func (m *GetSubscriptionRequest) GetFullName() string {
+	if m != nil {
+		return m.FullName
+	}
+	return ""
+}
+
 // Wrapper for subscription
 type DeactivateSubscriptionResponse struct {
 	// Message response
@@ -35,7 +117,7 @@ func (m *DeactivateSubscriptionResponse) Reset()         { *m = DeactivateSubscr
 func (m *DeactivateSubscriptionResponse) String() string { return proto.CompactTextString(m) }
 func (*DeactivateSubscriptionResponse) ProtoMessage()    {}
 func (*DeactivateSubscriptionResponse) Descriptor() ([]byte, []int) {
-	return fileDescriptor_85e4db6795b5b1aa, []int{0}
+	return fileDescriptor_85e4db6795b5b1aa, []int{2}
 }
 
 func (m *DeactivateSubscriptionResponse) XXX_Unmarshal(b []byte) error {
@@ -76,7 +158,7 @@ func (m *DeactivateSubscriptionRequest) Reset()         { *m = DeactivateSubscri
 func (m *DeactivateSubscriptionRequest) String() string { return proto.CompactTextString(m) }
 func (*DeactivateSubscriptionRequest) ProtoMessage()    {}
 func (*DeactivateSubscriptionRequest) Descriptor() ([]byte, []int) {
-	return fileDescriptor_85e4db6795b5b1aa, []int{1}
+	return fileDescriptor_85e4db6795b5b1aa, []int{3}
 }
 
 func (m *DeactivateSubscriptionRequest) XXX_Unmarshal(b []byte) error {
@@ -117,7 +199,7 @@ func (m *ActivateSubscriptionResponse) Reset()         { *m = ActivateSubscripti
 func (m *ActivateSubscriptionResponse) String() string { return proto.CompactTextString(m) }
 func (*ActivateSubscriptionResponse) ProtoMessage()    {}
 func (*ActivateSubscriptionResponse) Descriptor() ([]byte, []int) {
-	return fileDescriptor_85e4db6795b5b1aa, []int{2}
+	return fileDescriptor_85e4db6795b5b1aa, []int{4}
 }
 
 func (m *ActivateSubscriptionResponse) XXX_Unmarshal(b []byte) error {
@@ -158,7 +240,7 @@ func (m *ActivateSubscriptionRequest) Reset()         { *m = ActivateSubscriptio
 func (m *ActivateSubscriptionRequest) String() string { return proto.CompactTextString(m) }
 func (*ActivateSubscriptionRequest) ProtoMessage()    {}
 func (*ActivateSubscriptionRequest) Descriptor() ([]byte, []int) {
-	return fileDescriptor_85e4db6795b5b1aa, []int{3}
+	return fileDescriptor_85e4db6795b5b1aa, []int{5}
 }
 
 func (m *ActivateSubscriptionRequest) XXX_Unmarshal(b []byte) error {
@@ -203,7 +285,7 @@ func (m *Subscription) Reset()         { *m = Subscription{} }
 func (m *Subscription) String() string { return proto.CompactTextString(m) }
 func (*Subscription) ProtoMessage()    {}
 func (*Subscription) Descriptor() ([]byte, []int) {
-	return fileDescriptor_85e4db6795b5b1aa, []int{4}
+	return fileDescriptor_85e4db6795b5b1aa, []int{6}
 }
 
 func (m *Subscription) XXX_Unmarshal(b []byte) error {
@@ -260,7 +342,7 @@ func (m *PushConfig) Reset()         { *m = PushConfig{} }
 func (m *PushConfig) String() string { return proto.CompactTextString(m) }
 func (*PushConfig) ProtoMessage()    {}
 func (*PushConfig) Descriptor() ([]byte, []int) {
-	return fileDescriptor_85e4db6795b5b1aa, []int{5}
+	return fileDescriptor_85e4db6795b5b1aa, []int{7}
 }
 
 func (m *PushConfig) XXX_Unmarshal(b []byte) error {
@@ -310,7 +392,7 @@ func (m *RetryPolicy) Reset()         { *m = RetryPolicy{} }
 func (m *RetryPolicy) String() string { return proto.CompactTextString(m) }
 func (*RetryPolicy) ProtoMessage()    {}
 func (*RetryPolicy) Descriptor() ([]byte, []int) {
-	return fileDescriptor_85e4db6795b5b1aa, []int{6}
+	return fileDescriptor_85e4db6795b5b1aa, []int{8}
 }
 
 func (m *RetryPolicy) XXX_Unmarshal(b []byte) error {
@@ -346,6 +428,8 @@ func (m *RetryPolicy) GetPeriod() uint32 {
 }
 
 func init() {
+	proto.RegisterType((*GetSubscriptionResponse)(nil), "GetSubscriptionResponse")
+	proto.RegisterType((*GetSubscriptionRequest)(nil), "GetSubscriptionRequest")
 	proto.RegisterType((*DeactivateSubscriptionResponse)(nil), "DeactivateSubscriptionResponse")
 	proto.RegisterType((*DeactivateSubscriptionRequest)(nil), "DeactivateSubscriptionRequest")
 	proto.RegisterType((*ActivateSubscriptionResponse)(nil), "ActivateSubscriptionResponse")
@@ -358,28 +442,31 @@ func init() {
 func init() { proto.RegisterFile("ams.proto", fileDescriptor_85e4db6795b5b1aa) }
 
 var fileDescriptor_85e4db6795b5b1aa = []byte{
-	// 331 bytes of a gzipped FileDescriptorProto
-	0x1f, 0x8b, 0x08, 0x00, 0x00, 0x00, 0x00, 0x00, 0x02, 0xff, 0x9c, 0x52, 0x4f, 0x4b, 0xfb, 0x40,
-	0x10, 0x6d, 0x7f, 0x94, 0xfe, 0xec, 0xa4, 0xbd, 0x0c, 0x52, 0x42, 0xff, 0x29, 0xeb, 0x45, 0x10,
-	0x16, 0xac, 0x17, 0x15, 0x2f, 0x45, 0xbd, 0x4a, 0x49, 0xf5, 0xe4, 0xa1, 0x6c, 0xd3, 0x69, 0xbb,
-	0xd0, 0x64, 0xd7, 0xec, 0xa6, 0xd2, 0x8f, 0xe7, 0x37, 0x93, 0x2c, 0x0d, 0x26, 0x50, 0x73, 0xf0,
-	0xb6, 0xf3, 0xe6, 0xbd, 0x7d, 0xb3, 0x3b, 0x0f, 0x5a, 0x22, 0x32, 0x5c, 0x27, 0xca, 0x2a, 0x76,
-	0x0f, 0xa3, 0x27, 0x12, 0xa1, 0x95, 0x3b, 0x61, 0x69, 0x96, 0x2e, 0x4c, 0x98, 0x48, 0x6d, 0xa5,
-	0x8a, 0x03, 0x32, 0x5a, 0xc5, 0x86, 0xd0, 0x87, 0xff, 0x11, 0x19, 0x23, 0xd6, 0xe4, 0xd7, 0xcf,
-	0xeb, 0x97, 0xad, 0x20, 0x2f, 0xd9, 0x03, 0x0c, 0x7f, 0xd3, 0x7e, 0xa4, 0x64, 0x2c, 0xf6, 0xa1,
-	0xb5, 0x4a, 0xb7, 0xdb, 0x79, 0x2c, 0xa2, 0x5c, 0x7c, 0x92, 0x01, 0x2f, 0x22, 0x22, 0x76, 0x0b,
-	0x83, 0xc9, 0xdf, 0x7c, 0xa7, 0xd0, 0x9f, 0x54, 0xb8, 0x5e, 0x43, 0xbb, 0x08, 0x3b, 0xb5, 0x37,
-	0xee, 0xf0, 0x12, 0xb7, 0x44, 0x61, 0x9f, 0x65, 0x49, 0xe5, 0xe0, 0x38, 0x04, 0x70, 0x4d, 0xab,
-	0xb4, 0x0c, 0xfd, 0x7f, 0xae, 0xeb, 0xe8, 0xaf, 0x19, 0x80, 0x57, 0x00, 0xd3, 0xd4, 0x6c, 0x1e,
-	0x55, 0xbc, 0x92, 0x6b, 0xbf, 0xe1, 0xcc, 0x3d, 0xfe, 0x03, 0x05, 0x85, 0x36, 0x13, 0x45, 0x32,
-	0x5e, 0x40, 0x47, 0xa7, 0x66, 0x33, 0xa7, 0x78, 0xa9, 0x95, 0x8c, 0xed, 0xc1, 0xba, 0x9d, 0x81,
-	0xcf, 0x07, 0x0c, 0x39, 0x78, 0x01, 0xd9, 0x64, 0x3f, 0x55, 0x5b, 0x19, 0xee, 0x9d, 0xbf, 0x37,
-	0x6e, 0xf3, 0x02, 0x16, 0x14, 0x09, 0xec, 0xae, 0xc4, 0x47, 0x84, 0x86, 0xdd, 0xeb, 0xfc, 0x55,
-	0xee, 0x8c, 0x5d, 0x68, 0x6a, 0x4a, 0xa4, 0x5a, 0xba, 0xdb, 0x3a, 0xc1, 0xa1, 0x1a, 0x7f, 0xd5,
-	0xc1, 0xcb, 0xc6, 0x9b, 0x51, 0xb2, 0x93, 0x21, 0xe1, 0x1b, 0x9c, 0x1e, 0xfb, 0x78, 0x1c, 0xf0,
-	0x8a, 0x7d, 0xf4, 0x86, 0xbc, 0x6a, 0xcf, 0xac, 0x86, 0xef, 0xd0, 0x3d, 0x9e, 0x23, 0x1c, 0xf1,
-	0xca, 0x80, 0xf5, 0xce, 0x78, 0x75, 0x78, 0x59, 0x6d, 0xd1, 0x74, 0x39, 0xbf, 0xf9, 0x0e, 0x00,
-	0x00, 0xff, 0xff, 0xac, 0xfc, 0xb5, 0xc5, 0xf4, 0x02, 0x00, 0x00,
+	// 378 bytes of a gzipped FileDescriptorProto
+	0x1f, 0x8b, 0x08, 0x00, 0x00, 0x00, 0x00, 0x00, 0x02, 0xff, 0x9c, 0x53, 0xdf, 0x6b, 0xe2, 0x40,
+	0x10, 0x56, 0x11, 0xef, 0x9c, 0x44, 0x0e, 0x86, 0x43, 0x83, 0xbf, 0xee, 0xd8, 0x7b, 0x39, 0x38,
+	0x58, 0xd0, 0xa3, 0xd0, 0x96, 0xbe, 0x48, 0x7f, 0xbd, 0x94, 0x22, 0xb1, 0x7d, 0xea, 0x83, 0xc4,
+	0xb8, 0xea, 0x82, 0xc9, 0x6e, 0xb3, 0x1b, 0x8b, 0x7f, 0x42, 0xff, 0xeb, 0x92, 0x45, 0x69, 0xd2,
+	0xc6, 0xb4, 0xf4, 0x2d, 0xf3, 0xcd, 0x37, 0xf3, 0x4d, 0x76, 0xe6, 0x83, 0xba, 0x17, 0x28, 0x2a,
+	0x23, 0xa1, 0x05, 0xb9, 0x81, 0xd6, 0x35, 0xd3, 0x93, 0x78, 0xa6, 0xfc, 0x88, 0x4b, 0xcd, 0x45,
+	0xe8, 0x32, 0x25, 0x45, 0xa8, 0x18, 0x0e, 0xc0, 0x56, 0x29, 0xdc, 0x29, 0xff, 0x2e, 0xff, 0xb5,
+	0x86, 0x0d, 0x9a, 0x21, 0x67, 0x28, 0xe4, 0x08, 0x9a, 0xef, 0xba, 0x3d, 0xc6, 0x4c, 0x69, 0xec,
+	0x40, 0x7d, 0x11, 0xaf, 0xd7, 0xd3, 0xd0, 0x0b, 0x98, 0xe9, 0x54, 0x77, 0xbf, 0x27, 0xc0, 0xad,
+	0x17, 0x30, 0x72, 0x0a, 0xfd, 0x0b, 0xe6, 0xf9, 0x9a, 0x6f, 0x3c, 0xcd, 0x72, 0x67, 0x71, 0xe0,
+	0x5b, 0xc0, 0x94, 0xf2, 0x96, 0xfb, 0xe2, 0x7d, 0x48, 0xce, 0xa0, 0x77, 0xa8, 0xf6, 0x13, 0xca,
+	0xc7, 0xd0, 0x1d, 0x7d, 0x4d, 0x77, 0x0c, 0x9d, 0x51, 0x81, 0xea, 0x00, 0xec, 0xc9, 0xc7, 0x8f,
+	0x97, 0x8e, 0xc8, 0x53, 0xb6, 0xa4, 0x70, 0x70, 0xec, 0x01, 0x98, 0xa4, 0x16, 0x92, 0xfb, 0x4e,
+	0xc5, 0x64, 0x0d, 0xfd, 0x2e, 0x01, 0xf0, 0x1f, 0xc0, 0x38, 0x56, 0xab, 0x73, 0x11, 0x2e, 0xf8,
+	0xd2, 0xa9, 0x1a, 0x71, 0x8b, 0xbe, 0x42, 0x6e, 0x2a, 0x4d, 0xbc, 0x34, 0x19, 0xff, 0x40, 0x43,
+	0xc6, 0x6a, 0x35, 0x65, 0xe1, 0x5c, 0x0a, 0x1e, 0xea, 0x9d, 0xb4, 0x9d, 0x80, 0x97, 0x3b, 0x0c,
+	0x29, 0x58, 0x2e, 0xd3, 0xd1, 0x76, 0x2c, 0xd6, 0xdc, 0xdf, 0x1a, 0x7d, 0x6b, 0x68, 0xd3, 0x14,
+	0xe6, 0xa6, 0x09, 0xe4, 0x24, 0xc3, 0x47, 0x84, 0xaa, 0xde, 0xca, 0xfd, 0x5f, 0x99, 0x6f, 0x6c,
+	0x42, 0x4d, 0xb2, 0x88, 0x8b, 0xb9, 0xe9, 0xd6, 0x70, 0x77, 0xd1, 0xf0, 0xb9, 0x02, 0x56, 0x32,
+	0xde, 0x84, 0x45, 0x1b, 0xee, 0x33, 0xbc, 0x87, 0x9f, 0x79, 0x0f, 0x8f, 0x5d, 0x5a, 0xb0, 0x8f,
+	0x76, 0x8f, 0x16, 0xed, 0x99, 0x94, 0xf0, 0x01, 0x9a, 0xf9, 0x77, 0x84, 0x7d, 0x5a, 0x78, 0x60,
+	0xed, 0x5f, 0xb4, 0xf8, 0x78, 0x49, 0x09, 0xaf, 0xe0, 0xc7, 0x1b, 0x5f, 0x60, 0x8b, 0xe6, 0x3b,
+	0xa5, 0xed, 0xd0, 0x03, 0x86, 0x24, 0xa5, 0x59, 0xcd, 0x98, 0xf6, 0xff, 0x4b, 0x00, 0x00, 0x00,
+	0xff, 0xff, 0x6a, 0xc3, 0xe7, 0x9d, 0xc1, 0x03, 0x00, 0x00,
 }
 
 // Reference imports to suppress errors if they are not otherwise used.
@@ -398,6 +485,8 @@ type PushServiceClient interface {
 	ActivateSubscription(ctx context.Context, in *ActivateSubscriptionRequest, opts ...grpc.CallOption) (*ActivateSubscriptionResponse, error)
 	//  Deactivates a subscription in order for the service to stop handling the push functionality
 	DeactivateSubscription(ctx context.Context, in *DeactivateSubscriptionRequest, opts ...grpc.CallOption) (*DeactivateSubscriptionResponse, error)
+	// Returns the detailed information about an active subscription
+	GetSubscription(ctx context.Context, in *GetSubscriptionRequest, opts ...grpc.CallOption) (*GetSubscriptionResponse, error)
 }
 
 type pushServiceClient struct {
@@ -426,12 +515,23 @@ func (c *pushServiceClient) DeactivateSubscription(ctx context.Context, in *Deac
 	return out, nil
 }
 
+func (c *pushServiceClient) GetSubscription(ctx context.Context, in *GetSubscriptionRequest, opts ...grpc.CallOption) (*GetSubscriptionResponse, error) {
+	out := new(GetSubscriptionResponse)
+	err := c.cc.Invoke(ctx, "/PushService/GetSubscription", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 // PushServiceServer is the server API for PushService service.
 type PushServiceServer interface {
 	// Activates a subscription in order for the service to start handling the push functionality
 	ActivateSubscription(context.Context, *ActivateSubscriptionRequest) (*ActivateSubscriptionResponse, error)
 	//  Deactivates a subscription in order for the service to stop handling the push functionality
 	DeactivateSubscription(context.Context, *DeactivateSubscriptionRequest) (*DeactivateSubscriptionResponse, error)
+	// Returns the detailed information about an active subscription
+	GetSubscription(context.Context, *GetSubscriptionRequest) (*GetSubscriptionResponse, error)
 }
 
 func RegisterPushServiceServer(s *grpc.Server, srv PushServiceServer) {
@@ -474,6 +574,24 @@ func _PushService_DeactivateSubscription_Handler(srv interface{}, ctx context.Co
 	return interceptor(ctx, in, info, handler)
 }
 
+func _PushService_GetSubscription_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(GetSubscriptionRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(PushServiceServer).GetSubscription(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/PushService/GetSubscription",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(PushServiceServer).GetSubscription(ctx, req.(*GetSubscriptionRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 var _PushService_serviceDesc = grpc.ServiceDesc{
 	ServiceName: "PushService",
 	HandlerType: (*PushServiceServer)(nil),
@@ -485,6 +603,10 @@ var _PushService_serviceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "DeactivateSubscription",
 			Handler:    _PushService_DeactivateSubscription_Handler,
+		},
+		{
+			MethodName: "GetSubscription",
+			Handler:    _PushService_GetSubscription_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},
