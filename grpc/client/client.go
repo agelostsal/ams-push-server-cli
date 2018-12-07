@@ -119,3 +119,14 @@ func (cl *grpcClient) GetSubscription(fullName string) *grpcClientStatus {
 		message: r.String(),
 	}
 }
+
+// ListSubscriptions is a wrapper over the grpc ListSubscriptions call
+func (cl *grpcClient) ListSubscriptions() *grpcClientStatus {
+
+	r, err := cl.psc.ListSubscriptions(context.Background(), &ams.ListSubscriptionsRequest{})
+
+	return &grpcClientStatus{
+		err:     err,
+		message: fmt.Sprintf("%v", r.Subscriptions),
+	}
+}

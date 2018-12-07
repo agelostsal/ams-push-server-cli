@@ -28,3 +28,22 @@ func NewSubscriptionListOneCommand() *cobra.Command {
 
 	return retrieveSubCmd
 }
+
+// NewSubscriptionListManyCommand initialises a subscriptions retrieval command
+func NewSubscriptionListManyCommand() *cobra.Command {
+
+	retrieveSubCmd := &cobra.Command{
+		Use:   "list-many",
+		Short: "Retrieves all currently active subscriptions",
+		Long:  "The list-many command retrieves the names of all currently active subscriptions on the push server",
+		DisableFlagsInUseLine: true,
+		Run: func(cmd *cobra.Command, args []string) {
+			// get the global uri flag
+			uri, _ := cmd.Flags().GetString("uri")
+			// perform the subscription retrieval
+			cmd.Println(grpcclient.New(uri).ListSubscriptions().Result())
+		},
+	}
+
+	return retrieveSubCmd
+}

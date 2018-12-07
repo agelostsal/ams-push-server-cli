@@ -1,5 +1,4 @@
 {
-  "uri": "localhost:5555",
   "retry_type": "linear",
   "retry_period": 300
 }

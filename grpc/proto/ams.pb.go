@@ -22,6 +22,78 @@ var _ = math.Inf
 // proto package needs to be updated.
 const _ = proto.ProtoPackageIsVersion2 // please upgrade the proto package
 
+// ListSubscriptionsResponse holds a list containing all active subscriptions' names
+type ListSubscriptionsResponse struct {
+	Subscriptions        []string `protobuf:"bytes,1,rep,name=subscriptions,proto3" json:"subscriptions,omitempty"`
+	XXX_NoUnkeyedLiteral struct{} `json:"-"`
+	XXX_unrecognized     []byte   `json:"-"`
+	XXX_sizecache        int32    `json:"-"`
+}
+
+func (m *ListSubscriptionsResponse) Reset()         { *m = ListSubscriptionsResponse{} }
+func (m *ListSubscriptionsResponse) String() string { return proto.CompactTextString(m) }
+func (*ListSubscriptionsResponse) ProtoMessage()    {}
+func (*ListSubscriptionsResponse) Descriptor() ([]byte, []int) {
+	return fileDescriptor_85e4db6795b5b1aa, []int{0}
+}
+
+func (m *ListSubscriptionsResponse) XXX_Unmarshal(b []byte) error {
+	return xxx_messageInfo_ListSubscriptionsResponse.Unmarshal(m, b)
+}
+func (m *ListSubscriptionsResponse) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
+	return xxx_messageInfo_ListSubscriptionsResponse.Marshal(b, m, deterministic)
+}
+func (m *ListSubscriptionsResponse) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_ListSubscriptionsResponse.Merge(m, src)
+}
+func (m *ListSubscriptionsResponse) XXX_Size() int {
+	return xxx_messageInfo_ListSubscriptionsResponse.Size(m)
+}
+func (m *ListSubscriptionsResponse) XXX_DiscardUnknown() {
+	xxx_messageInfo_ListSubscriptionsResponse.DiscardUnknown(m)
+}
+
+var xxx_messageInfo_ListSubscriptionsResponse proto.InternalMessageInfo
+
+func (m *ListSubscriptionsResponse) GetSubscriptions() []string {
+	if m != nil {
+		return m.Subscriptions
+	}
+	return nil
+}
+
+// ListSubscriptionsRequest is an empty struct
+type ListSubscriptionsRequest struct {
+	XXX_NoUnkeyedLiteral struct{} `json:"-"`
+	XXX_unrecognized     []byte   `json:"-"`
+	XXX_sizecache        int32    `json:"-"`
+}
+
+func (m *ListSubscriptionsRequest) Reset()         { *m = ListSubscriptionsRequest{} }
+func (m *ListSubscriptionsRequest) String() string { return proto.CompactTextString(m) }
+func (*ListSubscriptionsRequest) ProtoMessage()    {}
+func (*ListSubscriptionsRequest) Descriptor() ([]byte, []int) {
+	return fileDescriptor_85e4db6795b5b1aa, []int{1}
+}
+
+func (m *ListSubscriptionsRequest) XXX_Unmarshal(b []byte) error {
+	return xxx_messageInfo_ListSubscriptionsRequest.Unmarshal(m, b)
+}
+func (m *ListSubscriptionsRequest) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
+	return xxx_messageInfo_ListSubscriptionsRequest.Marshal(b, m, deterministic)
+}
+func (m *ListSubscriptionsRequest) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_ListSubscriptionsRequest.Merge(m, src)
+}
+func (m *ListSubscriptionsRequest) XXX_Size() int {
+	return xxx_messageInfo_ListSubscriptionsRequest.Size(m)
+}
+func (m *ListSubscriptionsRequest) XXX_DiscardUnknown() {
+	xxx_messageInfo_ListSubscriptionsRequest.DiscardUnknown(m)
+}
+
+var xxx_messageInfo_ListSubscriptionsRequest proto.InternalMessageInfo
+
 // Wrapper for subscription.
 type GetSubscriptionResponse struct {
 	// Required. A subscription.
@@ -35,7 +107,7 @@ func (m *GetSubscriptionResponse) Reset()         { *m = GetSubscriptionResponse
 func (m *GetSubscriptionResponse) String() string { return proto.CompactTextString(m) }
 func (*GetSubscriptionResponse) ProtoMessage()    {}
 func (*GetSubscriptionResponse) Descriptor() ([]byte, []int) {
-	return fileDescriptor_85e4db6795b5b1aa, []int{0}
+	return fileDescriptor_85e4db6795b5b1aa, []int{2}
 }
 
 func (m *GetSubscriptionResponse) XXX_Unmarshal(b []byte) error {
@@ -76,7 +148,7 @@ func (m *GetSubscriptionRequest) Reset()         { *m = GetSubscriptionRequest{}
 func (m *GetSubscriptionRequest) String() string { return proto.CompactTextString(m) }
 func (*GetSubscriptionRequest) ProtoMessage()    {}
 func (*GetSubscriptionRequest) Descriptor() ([]byte, []int) {
-	return fileDescriptor_85e4db6795b5b1aa, []int{1}
+	return fileDescriptor_85e4db6795b5b1aa, []int{3}
 }
 
 func (m *GetSubscriptionRequest) XXX_Unmarshal(b []byte) error {
@@ -117,7 +189,7 @@ func (m *DeactivateSubscriptionResponse) Reset()         { *m = DeactivateSubscr
 func (m *DeactivateSubscriptionResponse) String() string { return proto.CompactTextString(m) }
 func (*DeactivateSubscriptionResponse) ProtoMessage()    {}
 func (*DeactivateSubscriptionResponse) Descriptor() ([]byte, []int) {
-	return fileDescriptor_85e4db6795b5b1aa, []int{2}
+	return fileDescriptor_85e4db6795b5b1aa, []int{4}
 }
 
 func (m *DeactivateSubscriptionResponse) XXX_Unmarshal(b []byte) error {
@@ -158,7 +230,7 @@ func (m *DeactivateSubscriptionRequest) Reset()         { *m = DeactivateSubscri
 func (m *DeactivateSubscriptionRequest) String() string { return proto.CompactTextString(m) }
 func (*DeactivateSubscriptionRequest) ProtoMessage()    {}
 func (*DeactivateSubscriptionRequest) Descriptor() ([]byte, []int) {
-	return fileDescriptor_85e4db6795b5b1aa, []int{3}
+	return fileDescriptor_85e4db6795b5b1aa, []int{5}
 }
 
 func (m *DeactivateSubscriptionRequest) XXX_Unmarshal(b []byte) error {
@@ -199,7 +271,7 @@ func (m *ActivateSubscriptionResponse) Reset()         { *m = ActivateSubscripti
 func (m *ActivateSubscriptionResponse) String() string { return proto.CompactTextString(m) }
 func (*ActivateSubscriptionResponse) ProtoMessage()    {}
 func (*ActivateSubscriptionResponse) Descriptor() ([]byte, []int) {
-	return fileDescriptor_85e4db6795b5b1aa, []int{4}
+	return fileDescriptor_85e4db6795b5b1aa, []int{6}
 }
 
 func (m *ActivateSubscriptionResponse) XXX_Unmarshal(b []byte) error {
@@ -240,7 +312,7 @@ func (m *ActivateSubscriptionRequest) Reset()         { *m = ActivateSubscriptio
 func (m *ActivateSubscriptionRequest) String() string { return proto.CompactTextString(m) }
 func (*ActivateSubscriptionRequest) ProtoMessage()    {}
 func (*ActivateSubscriptionRequest) Descriptor() ([]byte, []int) {
-	return fileDescriptor_85e4db6795b5b1aa, []int{5}
+	return fileDescriptor_85e4db6795b5b1aa, []int{7}
 }
 
 func (m *ActivateSubscriptionRequest) XXX_Unmarshal(b []byte) error {
@@ -285,7 +357,7 @@ func (m *Subscription) Reset()         { *m = Subscription{} }
 func (m *Subscription) String() string { return proto.CompactTextString(m) }
 func (*Subscription) ProtoMessage()    {}
 func (*Subscription) Descriptor() ([]byte, []int) {
-	return fileDescriptor_85e4db6795b5b1aa, []int{6}
+	return fileDescriptor_85e4db6795b5b1aa, []int{8}
 }
 
 func (m *Subscription) XXX_Unmarshal(b []byte) error {
@@ -342,7 +414,7 @@ func (m *PushConfig) Reset()         { *m = PushConfig{} }
 func (m *PushConfig) String() string { return proto.CompactTextString(m) }
 func (*PushConfig) ProtoMessage()    {}
 func (*PushConfig) Descriptor() ([]byte, []int) {
-	return fileDescriptor_85e4db6795b5b1aa, []int{7}
+	return fileDescriptor_85e4db6795b5b1aa, []int{9}
 }
 
 func (m *PushConfig) XXX_Unmarshal(b []byte) error {
@@ -392,7 +464,7 @@ func (m *RetryPolicy) Reset()         { *m = RetryPolicy{} }
 func (m *RetryPolicy) String() string { return proto.CompactTextString(m) }
 func (*RetryPolicy) ProtoMessage()    {}
 func (*RetryPolicy) Descriptor() ([]byte, []int) {
-	return fileDescriptor_85e4db6795b5b1aa, []int{8}
+	return fileDescriptor_85e4db6795b5b1aa, []int{10}
 }
 
 func (m *RetryPolicy) XXX_Unmarshal(b []byte) error {
@@ -428,6 +500,8 @@ func (m *RetryPolicy) GetPeriod() uint32 {
 }
 
 func init() {
+	proto.RegisterType((*ListSubscriptionsResponse)(nil), "ListSubscriptionsResponse")
+	proto.RegisterType((*ListSubscriptionsRequest)(nil), "ListSubscriptionsRequest")
 	proto.RegisterType((*GetSubscriptionResponse)(nil), "GetSubscriptionResponse")
 	proto.RegisterType((*GetSubscriptionRequest)(nil), "GetSubscriptionRequest")
 	proto.RegisterType((*DeactivateSubscriptionResponse)(nil), "DeactivateSubscriptionResponse")
@@ -442,31 +516,34 @@ func init() {
 func init() { proto.RegisterFile("ams.proto", fileDescriptor_85e4db6795b5b1aa) }
 
 var fileDescriptor_85e4db6795b5b1aa = []byte{
-	// 378 bytes of a gzipped FileDescriptorProto
-	0x1f, 0x8b, 0x08, 0x00, 0x00, 0x00, 0x00, 0x00, 0x02, 0xff, 0x9c, 0x53, 0xdf, 0x6b, 0xe2, 0x40,
-	0x10, 0x56, 0x11, 0xef, 0x9c, 0x44, 0x0e, 0x86, 0x43, 0x83, 0xbf, 0xee, 0xd8, 0x7b, 0x39, 0x38,
-	0x58, 0xd0, 0xa3, 0xd0, 0x96, 0xbe, 0x48, 0x7f, 0xbd, 0x94, 0x22, 0xb1, 0x7d, 0xea, 0x83, 0xc4,
-	0xb8, 0xea, 0x82, 0xc9, 0x6e, 0xb3, 0x1b, 0x8b, 0x7f, 0x42, 0xff, 0xeb, 0x92, 0x45, 0x69, 0xd2,
-	0xc6, 0xb4, 0xf4, 0x2d, 0xf3, 0xcd, 0x37, 0xf3, 0x4d, 0x76, 0xe6, 0x83, 0xba, 0x17, 0x28, 0x2a,
-	0x23, 0xa1, 0x05, 0xb9, 0x81, 0xd6, 0x35, 0xd3, 0x93, 0x78, 0xa6, 0xfc, 0x88, 0x4b, 0xcd, 0x45,
-	0xe8, 0x32, 0x25, 0x45, 0xa8, 0x18, 0x0e, 0xc0, 0x56, 0x29, 0xdc, 0x29, 0xff, 0x2e, 0xff, 0xb5,
-	0x86, 0x0d, 0x9a, 0x21, 0x67, 0x28, 0xe4, 0x08, 0x9a, 0xef, 0xba, 0x3d, 0xc6, 0x4c, 0x69, 0xec,
-	0x40, 0x7d, 0x11, 0xaf, 0xd7, 0xd3, 0xd0, 0x0b, 0x98, 0xe9, 0x54, 0x77, 0xbf, 0x27, 0xc0, 0xad,
-	0x17, 0x30, 0x72, 0x0a, 0xfd, 0x0b, 0xe6, 0xf9, 0x9a, 0x6f, 0x3c, 0xcd, 0x72, 0x67, 0x71, 0xe0,
-	0x5b, 0xc0, 0x94, 0xf2, 0x96, 0xfb, 0xe2, 0x7d, 0x48, 0xce, 0xa0, 0x77, 0xa8, 0xf6, 0x13, 0xca,
-	0xc7, 0xd0, 0x1d, 0x7d, 0x4d, 0x77, 0x0c, 0x9d, 0x51, 0x81, 0xea, 0x00, 0xec, 0xc9, 0xc7, 0x8f,
-	0x97, 0x8e, 0xc8, 0x53, 0xb6, 0xa4, 0x70, 0x70, 0xec, 0x01, 0x98, 0xa4, 0x16, 0x92, 0xfb, 0x4e,
-	0xc5, 0x64, 0x0d, 0xfd, 0x2e, 0x01, 0xf0, 0x1f, 0xc0, 0x38, 0x56, 0xab, 0x73, 0x11, 0x2e, 0xf8,
-	0xd2, 0xa9, 0x1a, 0x71, 0x8b, 0xbe, 0x42, 0x6e, 0x2a, 0x4d, 0xbc, 0x34, 0x19, 0xff, 0x40, 0x43,
-	0xc6, 0x6a, 0x35, 0x65, 0xe1, 0x5c, 0x0a, 0x1e, 0xea, 0x9d, 0xb4, 0x9d, 0x80, 0x97, 0x3b, 0x0c,
-	0x29, 0x58, 0x2e, 0xd3, 0xd1, 0x76, 0x2c, 0xd6, 0xdc, 0xdf, 0x1a, 0x7d, 0x6b, 0x68, 0xd3, 0x14,
-	0xe6, 0xa6, 0x09, 0xe4, 0x24, 0xc3, 0x47, 0x84, 0xaa, 0xde, 0xca, 0xfd, 0x5f, 0x99, 0x6f, 0x6c,
-	0x42, 0x4d, 0xb2, 0x88, 0x8b, 0xb9, 0xe9, 0xd6, 0x70, 0x77, 0xd1, 0xf0, 0xb9, 0x02, 0x56, 0x32,
-	0xde, 0x84, 0x45, 0x1b, 0xee, 0x33, 0xbc, 0x87, 0x9f, 0x79, 0x0f, 0x8f, 0x5d, 0x5a, 0xb0, 0x8f,
-	0x76, 0x8f, 0x16, 0xed, 0x99, 0x94, 0xf0, 0x01, 0x9a, 0xf9, 0x77, 0x84, 0x7d, 0x5a, 0x78, 0x60,
-	0xed, 0x5f, 0xb4, 0xf8, 0x78, 0x49, 0x09, 0xaf, 0xe0, 0xc7, 0x1b, 0x5f, 0x60, 0x8b, 0xe6, 0x3b,
-	0xa5, 0xed, 0xd0, 0x03, 0x86, 0x24, 0xa5, 0x59, 0xcd, 0x98, 0xf6, 0xff, 0x4b, 0x00, 0x00, 0x00,
-	0xff, 0xff, 0x6a, 0xc3, 0xe7, 0x9d, 0xc1, 0x03, 0x00, 0x00,
+	// 426 bytes of a gzipped FileDescriptorProto
+	0x1f, 0x8b, 0x08, 0x00, 0x00, 0x00, 0x00, 0x00, 0x02, 0xff, 0x9c, 0x54, 0xdf, 0x8b, 0xd3, 0x40,
+	0x10, 0x4e, 0xcf, 0xe3, 0x34, 0x93, 0x04, 0x71, 0x90, 0x5e, 0x2e, 0x77, 0x3d, 0xcb, 0xea, 0x43,
+	0x41, 0x58, 0x68, 0x45, 0x50, 0xf1, 0xa5, 0xf8, 0xeb, 0xa5, 0x48, 0x49, 0xf5, 0xc9, 0x87, 0x92,
+	0xa6, 0xdb, 0x76, 0xa1, 0xc9, 0xae, 0xd9, 0x4d, 0xa5, 0x7f, 0xa9, 0xff, 0x8e, 0x64, 0x69, 0x35,
+	0xb1, 0x49, 0x94, 0x7b, 0xcb, 0x7c, 0xf3, 0xcd, 0xf7, 0x4d, 0x76, 0x67, 0x16, 0xec, 0x28, 0x51,
+	0x54, 0x66, 0x42, 0x0b, 0x32, 0x86, 0xab, 0x09, 0x57, 0x7a, 0x96, 0x2f, 0x54, 0x9c, 0x71, 0xa9,
+	0xb9, 0x48, 0x55, 0xc8, 0x94, 0x14, 0xa9, 0x62, 0xf8, 0x0c, 0x3c, 0x55, 0x4e, 0xf8, 0x9d, 0xfe,
+	0xbd, 0x81, 0x1d, 0x56, 0x41, 0x12, 0x80, 0x5f, 0x23, 0xf1, 0x3d, 0x67, 0x4a, 0x93, 0x09, 0x5c,
+	0x7e, 0x62, 0x95, 0xd4, 0x6f, 0xf1, 0x21, 0xb8, 0x65, 0x1d, 0xbf, 0xd3, 0xef, 0x0c, 0x9c, 0x91,
+	0x47, 0x2b, 0xe4, 0x0a, 0x85, 0xbc, 0x84, 0xee, 0x89, 0x9a, 0xf1, 0xc1, 0x6b, 0xb0, 0x57, 0xf9,
+	0x76, 0x3b, 0x4f, 0xa3, 0x84, 0x19, 0x25, 0x3b, 0x7c, 0x50, 0x00, 0x9f, 0xa3, 0x84, 0x91, 0x37,
+	0x70, 0xfb, 0x9e, 0x45, 0xb1, 0xe6, 0xbb, 0x48, 0xb3, 0xda, 0x5e, 0x7c, 0xb8, 0x9f, 0x30, 0xa5,
+	0xa2, 0xf5, 0xb1, 0xf8, 0x18, 0x92, 0xb7, 0xd0, 0x6b, 0xaa, 0xfd, 0x0f, 0xe7, 0x57, 0x70, 0x33,
+	0xbe, 0x9b, 0xef, 0x14, 0xae, 0xc7, 0x2d, 0xae, 0x43, 0x70, 0x67, 0xff, 0x3e, 0xbc, 0x72, 0x44,
+	0x7e, 0x54, 0x4b, 0x5a, 0x1b, 0xc7, 0x1e, 0x80, 0x49, 0x6a, 0x21, 0x79, 0xec, 0x9f, 0x99, 0xac,
+	0xa1, 0x7f, 0x29, 0x00, 0x7c, 0x0e, 0x30, 0xcd, 0xd5, 0xe6, 0x9d, 0x48, 0x57, 0x7c, 0xed, 0x9f,
+	0x1b, 0x73, 0x87, 0xfe, 0x81, 0xc2, 0x52, 0x9a, 0x44, 0x65, 0x32, 0x3e, 0x05, 0x4f, 0xe6, 0x6a,
+	0x33, 0x67, 0xe9, 0x52, 0x0a, 0x9e, 0xea, 0x83, 0xb5, 0x5b, 0x80, 0x1f, 0x0e, 0x18, 0x52, 0x70,
+	0x42, 0xa6, 0xb3, 0xfd, 0x54, 0x6c, 0x79, 0xbc, 0x37, 0xfe, 0xce, 0xc8, 0xa5, 0x25, 0x2c, 0x2c,
+	0x13, 0xc8, 0xeb, 0x0a, 0x1f, 0x11, 0xce, 0xf5, 0x5e, 0x1e, 0xff, 0xca, 0x7c, 0x63, 0x17, 0x2e,
+	0x24, 0xcb, 0xb8, 0x58, 0x1a, 0x35, 0x2f, 0x3c, 0x44, 0xa3, 0x9f, 0x67, 0xe0, 0x14, 0xed, 0xcd,
+	0x58, 0xb6, 0xe3, 0x31, 0xc3, 0xaf, 0xf0, 0xb8, 0xee, 0xe0, 0xf1, 0x86, 0xb6, 0xdc, 0x47, 0xd0,
+	0xa3, 0x6d, 0xf7, 0x4c, 0x2c, 0xfc, 0x06, 0xdd, 0xfa, 0x39, 0xc2, 0x5b, 0xda, 0x3a, 0x60, 0xc1,
+	0x13, 0xda, 0x3e, 0xbc, 0xc4, 0xc2, 0x8f, 0xf0, 0xf0, 0xaf, 0xbd, 0xc0, 0x4b, 0x5a, 0xbf, 0x29,
+	0x81, 0x4f, 0x1b, 0x16, 0x92, 0x58, 0x38, 0x81, 0x47, 0x27, 0x9b, 0x8c, 0x57, 0xb4, 0x69, 0xbb,
+	0x83, 0x80, 0x36, 0xbe, 0x1d, 0xc4, 0x5a, 0x5c, 0x98, 0x17, 0xe6, 0xc5, 0xaf, 0x00, 0x00, 0x00,
+	0xff, 0xff, 0x67, 0x71, 0xc5, 0x46, 0x6e, 0x04, 0x00, 0x00,
 }
 
 // Reference imports to suppress errors if they are not otherwise used.
@@ -487,6 +564,8 @@ type PushServiceClient interface {
 	DeactivateSubscription(ctx context.Context, in *DeactivateSubscriptionRequest, opts ...grpc.CallOption) (*DeactivateSubscriptionResponse, error)
 	// Returns the detailed information about an active subscription
 	GetSubscription(ctx context.Context, in *GetSubscriptionRequest, opts ...grpc.CallOption) (*GetSubscriptionResponse, error)
+	// Returns a list cointaining the full names of all active subscriptions
+	ListSubscriptions(ctx context.Context, in *ListSubscriptionsRequest, opts ...grpc.CallOption) (*ListSubscriptionsResponse, error)
 }
 
 type pushServiceClient struct {
@@ -524,6 +603,15 @@ func (c *pushServiceClient) GetSubscription(ctx context.Context, in *GetSubscrip
 	return out, nil
 }
 
+func (c *pushServiceClient) ListSubscriptions(ctx context.Context, in *ListSubscriptionsRequest, opts ...grpc.CallOption) (*ListSubscriptionsResponse, error) {
+	out := new(ListSubscriptionsResponse)
+	err := c.cc.Invoke(ctx, "/PushService/ListSubscriptions", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 // PushServiceServer is the server API for PushService service.
 type PushServiceServer interface {
 	// Activates a subscription in order for the service to start handling the push functionality
@@ -532,6 +620,8 @@ type PushServiceServer interface {
 	DeactivateSubscription(context.Context, *DeactivateSubscriptionRequest) (*DeactivateSubscriptionResponse, error)
 	// Returns the detailed information about an active subscription
 	GetSubscription(context.Context, *GetSubscriptionRequest) (*GetSubscriptionResponse, error)
+	// Returns a list cointaining the full names of all active subscriptions
+	ListSubscriptions(context.Context, *ListSubscriptionsRequest) (*ListSubscriptionsResponse, error)
 }
 
 func RegisterPushServiceServer(s *grpc.Server, srv PushServiceServer) {
@@ -592,6 +682,24 @@ func _PushService_GetSubscription_Handler(srv interface{}, ctx context.Context, 
 	return interceptor(ctx, in, info, handler)
 }
 
+func _PushService_ListSubscriptions_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(ListSubscriptionsRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(PushServiceServer).ListSubscriptions(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/PushService/ListSubscriptions",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(PushServiceServer).ListSubscriptions(ctx, req.(*ListSubscriptionsRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 var _PushService_serviceDesc = grpc.ServiceDesc{
 	ServiceName: "PushService",
 	HandlerType: (*PushServiceServer)(nil),
@@ -607,6 +715,10 @@ var _PushService_serviceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "GetSubscription",
 			Handler:    _PushService_GetSubscription_Handler,
+		},
+		{
+			MethodName: "ListSubscriptions",
+			Handler:    _PushService_ListSubscriptions_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},

@@ -34,6 +34,9 @@ func NewRootCommand() *cobra.Command {
 	// add list-one subscription command
 	rootCmd.AddCommand(retrieve.NewSubscriptionListOneCommand())
 
+	// add list-many subscriptions command
+	rootCmd.AddCommand(retrieve.NewSubscriptionListManyCommand())
+
 	// add activate subscription sub command
 	rootCmd.AddCommand(activate.NewSubscriptionActivateCommand())
 

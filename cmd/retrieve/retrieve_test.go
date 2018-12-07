@@ -8,12 +8,12 @@ import (
 	"testing"
 )
 
-type ListOneSubscriptionCmdTestSuite struct {
+type RetrieveSubscriptionCmdTestSuite struct {
 	suite.Suite
 }
 
 // TestNewSubscriptionListOneCommand tests that a list one subscription command has been initialised properly
-func (suite *ListOneSubscriptionCmdTestSuite) TestNewSubscriptionListOneCommand() {
+func (suite *RetrieveSubscriptionCmdTestSuite) TestNewSubscriptionListOneCommand() {
 
 	ds := NewSubscriptionListOneCommand()
 	// despite not using the output here, we save the output to a buffer so we don't pollute the std.out with the help option
@@ -34,8 +34,8 @@ func (suite *ListOneSubscriptionCmdTestSuite) TestNewSubscriptionListOneCommand(
 	suite.Equal("string", sn.Value.Type())
 }
 
-// TestSubscriptionListOneCmdOutput tests various outputs of the deactivate subscription command
-func (suite *ListOneSubscriptionCmdTestSuite) TestSubscriptionListOneCmdOutput() {
+// TestSubscriptionListOneCmdOutput tests various outputs of the list one subscription command
+func (suite *RetrieveSubscriptionCmdTestSuite) TestSubscriptionListOneCmdOutput() {
 
 	ds := NewSubscriptionListOneCommand()
 	b := new(bytes.Buffer)
@@ -119,6 +119,55 @@ func (suite *ListOneSubscriptionCmdTestSuite) TestSubscriptionListOneCmdOutput()
 	suite.Equal(expectedOutput2, b2.String())
 }
 
+// TestNewSubscriptionListManyCommand tests that a list many subscription command has been initialised properly
+func (suite *RetrieveSubscriptionCmdTestSuite) TestNewSubscriptionListManyCommand() {
+
+	ds := NewSubscriptionListManyCommand()
+	// despite not using the output here, we save the output to a buffer so we don't pollute the std.out with the help option
+	b := new(bytes.Buffer)
+	ds.SetOutput(b)
+	ds.SetArgs([]string{"-h"})
+	ds.Execute()
+
+	suite.Equal("list-many", ds.Use)
+	suite.Equal("Retrieves all currently active subscriptions", ds.Short)
+	suite.Equal("The list-many command retrieves the names of all currently active subscriptions on the push server", ds.Long)
+	suite.True(ds.DisableFlagsInUseLine)
+}
+
+// TestSubscriptionListManyCmdOutput tests various outputs of the list many subscription command
+func (suite *RetrieveSubscriptionCmdTestSuite) TestSubscriptionListManyCmdOutput() {
+
+	ds := NewSubscriptionListManyCommand()
+	b := new(bytes.Buffer)
+	ds.SetOutput(b)
+	ds.SetArgs([]string{"-h"})
+	ds.Execute()
+
+	expectedOut := "The list-many command retrieves the names of all currently active subscriptions on the push server\n\n" +
+		"Usage:\n" +
+		"  list-many\n\n" +
+		"Flags:\n" +
+		"  -h, --help   help for list-many\n"
+
+		// test the help output
+	suite.Equal(expectedOut, b.String())
+
+	ds2 := NewSubscriptionListManyCommand()
+	b.Reset()
+	ds2.SetOutput(b)
+	ds2.SetArgs([]string{"list-many"})
+	ds2.Run = func(cmd *cobra.Command, args []string) {
+		cmd.Printf("Success: %v", []string{"s1", "s2", "s3"})
+	}
+	ds2.Execute()
+
+	expectedOut2 := "Success: [s1 s2 s3]"
+
+	// test the help output
+	suite.Equal(expectedOut2, b.String())
+
+}
 func TestDeactivateSubscriptionCmdTestSuite(t *testing.T) {
-	suite.Run(t, new(ListOneSubscriptionCmdTestSuite))
+	suite.Run(t, new(RetrieveSubscriptionCmdTestSuite))
 }

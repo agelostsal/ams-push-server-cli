@@ -13,6 +13,7 @@ Available Commands:
   deactivate  Deactivates a subscription on a push server
   health      Performs a health check call
   help        Help about any command
+  list-many   Retrieves information about a subscription currently active on the push server
   list-one    Retrieves information about a subscription currently active on the push server
 
 Flags:
@@ -106,6 +107,27 @@ $ apscli list-one -u example.com:443 -s /projects/projectname/subscriptions/suba
 $ Success: subscription:'<'full_name:"/projects/projectname/subscriptions/subanme" full_topic:"/projects/projectname/topics/topicname" PushConfig:'<'push_endpoint:"host.com" RetryPolicy:'<'type:"linear" period:300 > > >
 ```
 
+### Retrieve the names of all currently active subscriptions
+
+```commandline
+The list-many command retrieves the names of all currently active subscriptions on the push server
+
+Usage:
+   list-many
+
+Flags:
+  -h, --help   help for list-many
+
+Global Flags:
+  -u, --uri string   -u host:port
+```
+
+```commandline
+$ apscli list-many -u example.com:443 
+```
+```commandline
+$ Success: [s1, s2, s2]"
+```
 
 # Configuration
 
