@@ -15,16 +15,16 @@ type RetrieveSubscriptionCmdTestSuite struct {
 // TestNewSubscriptionListOneCommand tests that a list one subscription command has been initialised properly
 func (suite *RetrieveSubscriptionCmdTestSuite) TestNewSubscriptionListOneCommand() {
 
-	ds := NewSubscriptionListOneCommand()
+	ds := NewSubscriptionGetCommand()
 	// despite not using the output here, we save the output to a buffer so we don't pollute the std.out with the help option
 	b := new(bytes.Buffer)
 	ds.SetOutput(b)
 	ds.SetArgs([]string{"-h"})
 	ds.Execute()
 
-	suite.Equal("list-one", ds.Use)
+	suite.Equal("get", ds.Use)
 	suite.Equal("Retrieves information about a subscription currently active on the push server", ds.Short)
-	suite.Equal("The list-one command retrieves all information related to the given subscription name from the push server", ds.Long)
+	suite.Equal("The get command retrieves all information related to the given subscription name from the push server", ds.Long)
 	suite.True(ds.DisableFlagsInUseLine)
 
 	sn := ds.PersistentFlags().Lookup("full-sub")
@@ -37,26 +37,26 @@ func (suite *RetrieveSubscriptionCmdTestSuite) TestNewSubscriptionListOneCommand
 // TestSubscriptionListOneCmdOutput tests various outputs of the list one subscription command
 func (suite *RetrieveSubscriptionCmdTestSuite) TestSubscriptionListOneCmdOutput() {
 
-	ds := NewSubscriptionListOneCommand()
+	ds := NewSubscriptionGetCommand()
 	b := new(bytes.Buffer)
 	ds.SetOutput(b)
 	ds.SetArgs([]string{"-h"})
 	ds.Execute()
 
-	expectedOut := "The list-one command retrieves all information related to the given subscription name from the push server\n\n" +
+	expectedOut := "The get command retrieves all information related to the given subscription name from the push server\n\n" +
 		"Usage:\n" +
-		"  list-one\n\n" +
+		"  get\n\n" +
 		"Flags:\n" +
 		"  -s, --full-sub string   -s /projects/projectname/subscriptions/subanme\n" +
-		"  -h, --help              help for list-one\n"
+		"  -h, --help              help for get\n"
 
 	// test the help output
 	suite.Equal(expectedOut, b.String())
 
-	ds2 := NewSubscriptionListOneCommand()
+	ds2 := NewSubscriptionGetCommand()
 	b2 := new(bytes.Buffer)
 	ds2.SetOutput(b2)
-	ds2.SetArgs([]string{"list-one",
+	ds2.SetArgs([]string{"get",
 		"--full-sub=/projects/p1/subscriptions/s1"})
 
 	retry := ams.RetryPolicy{
@@ -103,17 +103,17 @@ func (suite *RetrieveSubscriptionCmdTestSuite) TestSubscriptionListOneCmdOutput(
 	// test the error output
 	suite.Equal("Error: Subscription /projects/p1/subscriptions/s1 is not active\n", b2.String())
 
-	ds3 := NewSubscriptionListOneCommand()
+	ds3 := NewSubscriptionGetCommand()
 	b2.Reset()
 	ds3.SetOutput(b2)
 	ds3.SetArgs([]string{})
 	ds3.Execute()
 	expectedOutput2 := "Error: required flag(s) \"full-sub\" not set\n" +
 		"Usage:\n" +
-		"  list-one\n\n" +
+		"  get\n\n" +
 		"Flags:\n" +
 		"  -s, --full-sub string   -s /projects/projectname/subscriptions/subanme\n" +
-		"  -h, --help              help for list-one\n\n"
+		"  -h, --help              help for get\n\n"
 
 	// test missing flags
 	suite.Equal(expectedOutput2, b2.String())
