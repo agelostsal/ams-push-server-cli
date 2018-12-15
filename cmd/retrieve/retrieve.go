@@ -29,13 +29,13 @@ func NewSubscriptionGetCommand() *cobra.Command {
 	return retrieveSubCmd
 }
 
-// NewSubscriptionListManyCommand initialises a subscriptions retrieval command
-func NewSubscriptionListManyCommand() *cobra.Command {
+// NewSubscriptionGetAllCommand initialises a subscriptions retrieval command
+func NewSubscriptionGetAllCommand() *cobra.Command {
 
 	retrieveSubCmd := &cobra.Command{
-		Use:   "list-many",
+		Use:   "get-all",
 		Short: "Retrieves all currently active subscriptions",
-		Long:  "The list-many command retrieves the names of all currently active subscriptions on the push server",
+		Long:  "The get-all command retrieves the names of all currently active subscriptions on the push server",
 		DisableFlagsInUseLine: true,
 		Run: func(cmd *cobra.Command, args []string) {
 			// get the global uri flag

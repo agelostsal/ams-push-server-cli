@@ -12,9 +12,9 @@ Available Commands:
   activate    Activates a subscription on a push server
   deactivate  Deactivates a subscription on a push server
   get    Retrieves information about a subscription currently active on the push server
+  get-all   Retrieves information about a subscription currently active on the push server
   health      Performs a health check call
   help        Help about any command
-  list-many   Retrieves information about a subscription currently active on the push server
 
 Flags:
   -h, --help         help for this command
@@ -110,20 +110,20 @@ $ Success: subscription:'<'full_name:"/projects/projectname/subscriptions/subanm
 ### Retrieve the names of all currently active subscriptions
 
 ```commandline
-The list-many command retrieves the names of all currently active subscriptions on the push server
+The get-all command retrieves the names of all currently active subscriptions on the push server
 
 Usage:
-   list-many
+   get-all
 
 Flags:
-  -h, --help   help for list-many
+  -h, --help   help for get-all
 
 Global Flags:
   -u, --uri string   -u host:port
 ```
 
 ```commandline
-$ apscli list-many -u example.com:443 
+$ apscli get-all -u example.com:443 
 ```
 ```commandline
 $ Success: [s1, s2, s2]"

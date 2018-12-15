@@ -122,41 +122,41 @@ func (suite *RetrieveSubscriptionCmdTestSuite) TestSubscriptionListOneCmdOutput(
 // TestNewSubscriptionListManyCommand tests that a list many subscription command has been initialised properly
 func (suite *RetrieveSubscriptionCmdTestSuite) TestNewSubscriptionListManyCommand() {
 
-	ds := NewSubscriptionListManyCommand()
+	ds := NewSubscriptionGetAllCommand()
 	// despite not using the output here, we save the output to a buffer so we don't pollute the std.out with the help option
 	b := new(bytes.Buffer)
 	ds.SetOutput(b)
 	ds.SetArgs([]string{"-h"})
 	ds.Execute()
 
-	suite.Equal("list-many", ds.Use)
+	suite.Equal("get-all", ds.Use)
 	suite.Equal("Retrieves all currently active subscriptions", ds.Short)
-	suite.Equal("The list-many command retrieves the names of all currently active subscriptions on the push server", ds.Long)
+	suite.Equal("The get-all command retrieves the names of all currently active subscriptions on the push server", ds.Long)
 	suite.True(ds.DisableFlagsInUseLine)
 }
 
 // TestSubscriptionListManyCmdOutput tests various outputs of the list many subscription command
 func (suite *RetrieveSubscriptionCmdTestSuite) TestSubscriptionListManyCmdOutput() {
 
-	ds := NewSubscriptionListManyCommand()
+	ds := NewSubscriptionGetAllCommand()
 	b := new(bytes.Buffer)
 	ds.SetOutput(b)
 	ds.SetArgs([]string{"-h"})
 	ds.Execute()
 
-	expectedOut := "The list-many command retrieves the names of all currently active subscriptions on the push server\n\n" +
+	expectedOut := "The get-all command retrieves the names of all currently active subscriptions on the push server\n\n" +
 		"Usage:\n" +
-		"  list-many\n\n" +
+		"  get-all\n\n" +
 		"Flags:\n" +
-		"  -h, --help   help for list-many\n"
+		"  -h, --help   help for get-all\n"
 
 		// test the help output
 	suite.Equal(expectedOut, b.String())
 
-	ds2 := NewSubscriptionListManyCommand()
+	ds2 := NewSubscriptionGetAllCommand()
 	b.Reset()
 	ds2.SetOutput(b)
-	ds2.SetArgs([]string{"list-many"})
+	ds2.SetArgs([]string{"get-all"})
 	ds2.Run = func(cmd *cobra.Command, args []string) {
 		cmd.Printf("Success: %v", []string{"s1", "s2", "s3"})
 	}
